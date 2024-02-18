@@ -32,7 +32,7 @@ export default function DataCard({ params, id, data, note, lastUpdate, setHealth
   };
 
   const noteColor = (noteValue: string) => {
-    if (noteValue === 'Anomaly detected') {
+    if (noteValue === 'Anomaly') {
       return theme.colors.red;
     } else if (noteValue === 'Alert') {
       return theme.colors.orange;
@@ -52,7 +52,7 @@ export default function DataCard({ params, id, data, note, lastUpdate, setHealth
   const handleUpdate = async () => {
     try {
       const assistantNote = await assistantHelp(value, params.measureUnit)
-
+      console.log("assistantNote", assistantNote)
       await AsyncStorage.setItem(id, JSON.stringify({ id, data: value, lastUpdate: currentFormattedDate(), note: assistantNote }))
       setHealthData(prevHealthData => {
         return prevHealthData.map(item => {
@@ -102,13 +102,13 @@ export default function DataCard({ params, id, data, note, lastUpdate, setHealth
       </Data>
 
       <BadgeContainer>
-        <Badge color={noteColor(note.split(":")[0])}>
-          <BadgeText>{note.split(":")[0]}</BadgeText>
+        <Badge color={noteColor(note.split("->")[0])}>
+          <BadgeText>{note.split("->")[0]}</BadgeText>
         </Badge>
       </BadgeContainer>
 
       <Note>
-        {note.split(": ")[1]}
+        {note.split("-> ")[1]}
       </Note>
     </Container>
   );
