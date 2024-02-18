@@ -2,9 +2,13 @@ import styled from '@emotion/native'
 
 export const Container = styled.View`
   flex: 1;
-  background-color: ${props => props.theme.colors.gray};
+  background-color: ${props => props.theme.colors.gray[300]};
   justify-content: center;
   padding: ${props => props.theme.padding.lg};
+`;
+
+export const Logo = styled.Image`
+  width: 100%;
 `;
 
 export const Form = styled.View`

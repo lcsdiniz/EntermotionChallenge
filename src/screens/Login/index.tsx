@@ -7,13 +7,15 @@ import {
   Alert,
 } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Container, Form, Title } from './styles';
+import { Container, Form, Logo, Title } from './styles';
 import RootStackParamList from '../../types/rootStackParamList';
 import Input from '../../components/Input';
 import PasswordInput from '../../components/PasswordInput';
 import Button from '../../components/Button';
 import Spinner from 'react-native-loading-spinner-overlay';
 import theme from '../../theme/theme';
+import logoImg from '../../assets/entermotionlogo.png';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
 
@@ -27,6 +29,7 @@ export default function Login({ navigation }: Props) {
     setLoading(true);
 
     try {
+      await AsyncStorage.setItem('@user', JSON.stringify({ name: 'John Doe', email: 'john.doe@entermotion.com' }))
       navigation.navigate('Tabs');
     } catch (error) {
       console.log('error', error);
@@ -47,10 +50,10 @@ export default function Login({ navigation }: Props) {
           textStyle={{ color: theme.colors.white }}
         />
         <Container>
-          <Form>
-            {/* <Logo /> */}
+          <Logo source={logoImg} resizeMode={"contain"} />
 
-            <Title>Type your credentials</Title>
+          <Form>
+            <Title>Login</Title>
 
             <Input
               label="Email"
@@ -66,7 +69,7 @@ export default function Login({ navigation }: Props) {
               placeholder="Password"
             />
 
-            <Button testID="login-button" onPress={login} label="Login" />
+            <Button testID="login-button" onPress={login} label="Sign in" />
           </Form>
         </Container>
       </KeyboardAvoidingView>

@@ -29,7 +29,7 @@ const Tabs = () => {
       <Tab.Screen
         name="Summary"
         component={Summary}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, gestureEnabled: false }}
       />
       <Tab.Screen name="User" component={User} options={{ headerShown: false }} />
     </Tab.Navigator>

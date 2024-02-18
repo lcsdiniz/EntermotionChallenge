@@ -1,5 +1,5 @@
 import { View, TextInputProps } from 'react-native';
-// import { MaterialCommunityIcons } from '@expo/vector-icons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { InputContainer, CustomInput, Label, IconButton } from './styles';
 import { useState } from 'react';
 
@@ -16,8 +16,8 @@ export default function PasswordInput({ value, ...rest }: TextInputProps) {
                     secureTextEntry={secure}
                     {...rest}
                 />
-                
-                {/* <IconButton
+
+                <IconButton
                     testID='show-password-button'
                     onPress={() => setSecure(!secure)}
                 >
@@ -26,7 +26,7 @@ export default function PasswordInput({ value, ...rest }: TextInputProps) {
                     ) : (
                         <MaterialCommunityIcons name="eye-off" size={24} color="black" />
                     )}
-                </IconButton> */}
+                </IconButton>
             </InputContainer>
         </View>
     )
