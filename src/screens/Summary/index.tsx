@@ -10,6 +10,7 @@ import { HealthData } from '../../types/healthData';
 import RootStackParamList from '../../types/rootStackParamList';
 import theme from '../../theme/theme';
 import { Container, Title, Subtitle, Scroll } from './styles';
+import { getParsedDataFromStorage } from '../../utils/getParseDataFromStorage';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Summary'>;
 
@@ -24,23 +25,9 @@ export type HealthDataParams = {
 export default function Summmary({ navigation }: Props) {
   const [healthData, setHealthData] = useState<HealthData[]>([]);
 
-  async function parseData() {
-    const heartRate = await AsyncStorage.getItem('heartRate');
-    const bloodPressure = await AsyncStorage.getItem('bloodPressure');
-    const caloriesBurned = await AsyncStorage.getItem('caloriesBurned');
-    const sleep = await AsyncStorage.getItem('sleep');
-
-    const parsedHeartRate = heartRate ? JSON.parse(heartRate) : { id: 'heartRate', data: 'N/A', lastUpdate: 'N/A', note: 'N/A' };
-    const parsedBloodPressure = bloodPressure ? JSON.parse(bloodPressure) : { id: 'bloodPressure', data: 'N/A', lastUpdate: 'N/A', note: 'N/A' };
-    const parsedCaloriesBurned = caloriesBurned ? JSON.parse(caloriesBurned) : { id: 'caloriesBurned', data: 'N/A', lastUpdate: 'N/A', note: 'N/A' };
-    const parsedSleep = sleep ? JSON.parse(sleep) : { id: 'sleep', data: 'N/A', lastUpdate: 'N/A', note: 'N/A' };
-
-    setHealthData([
-      parsedHeartRate,
-      parsedBloodPressure,
-      parsedCaloriesBurned,
-      parsedSleep,
-    ])
+  async function getStoredData() {
+    const storedData = await getParsedDataFromStorage()
+    setHealthData(storedData)
   }
 
   const healthDataParams: HealthDataParams[] = [
@@ -79,7 +66,7 @@ export default function Summmary({ navigation }: Props) {
   }
 
   useEffect(() => {
-    parseData()
+    getStoredData()
   }, [])
 
   return (

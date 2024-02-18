@@ -7,15 +7,16 @@ import {
   Alert,
 } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Container, Form, Logo, Title } from './styles';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Spinner from 'react-native-loading-spinner-overlay';
+
 import RootStackParamList from '../../types/rootStackParamList';
-import Input from '../../components/Input';
 import PasswordInput from '../../components/PasswordInput';
 import Button from '../../components/Button';
-import Spinner from 'react-native-loading-spinner-overlay';
+import Input from '../../components/Input';
 import theme from '../../theme/theme';
 import logoImg from '../../assets/entermotionlogo.png';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Container, Form, Logo, Title } from './styles';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
 

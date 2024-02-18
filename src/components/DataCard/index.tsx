@@ -36,8 +36,11 @@ export default function DataCard({ params, id, data, note, lastUpdate, setHealth
       return theme.colors.red;
     } else if (noteValue === 'Alert') {
       return theme.colors.orange;
-    } else {
+    } else if (noteValue === 'Healthy') {
       return theme.colors.green;
+    }
+    else {
+      return theme.colors.gray[500];
     }
   };
 

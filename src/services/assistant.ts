@@ -2,7 +2,7 @@ import { api } from "./api";
 import { TOKEN } from '@env';
 
 export async function assistantHelp(value: string, measureUnit: string) {
-  const prompt = `As a health assistant specialized in analyzing vital signs, you'll assess received data, flagging: "Anomaly->" for risky values, "Healthy->" for normal range, or "Alert->" for values slightly outside the norm. For "Anomaly->" or "Alert->", include healthy range, potential issues, and recommend a specialist in 15 words max. Hours denote sleep duration; calories, energy spent. Vital sign received: ${value} ${measureUnit}`
+  const prompt = `As a health assistant specialized in analyzing vital signs, you'll assess received data, flagging: "Anomaly->" for risky values, "Healthy->" for normal range, or "Alert->" for values slightly outside the norm. For "Anomaly->" or "Alert->", include healthy range, potential issues, and recommend a specialist in 15 words max. Hours denote sleep duration; calories, energy spent. If the value received not matches with the measure or just don't make sense, output "Invalid-> Unable to process the received data. Please provide valid vital sign measurements.". Vital sign received: ${value} ${measureUnit}`
   const response = await api.post('', {
     model: 'gpt-3.5-turbo',
     messages: [
