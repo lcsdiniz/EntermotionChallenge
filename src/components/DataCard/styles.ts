@@ -34,7 +34,7 @@ export const Data = styled.Text`
 
 export const MeasureUnit = styled.Text`
   font-size: ${props => props.theme.fontSizes.medium};
-  font-weight: 400;
+  font-weight: 500;
   color: ${props => props.theme.colors.gray[400]};
 `;
 

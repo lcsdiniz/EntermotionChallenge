@@ -32,11 +32,11 @@ export const Email = styled.Text`
   color: ${props => props.theme.colors.black};
 `;
 
-export const LogoutButtonContainer = styled.View`
+export const ButtonContainer = styled.View`
   padding: 0 ${props => props.theme.padding.xl};
 `;
 
-export const LogoutButton = styled.TouchableOpacity`
+export const Button = styled.TouchableOpacity`
   padding: ${props => props.theme.padding.md};
   background-color: ${props => props.theme.colors.primary};
   border-radius: ${props => props.theme.borderRadius};

@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Avatar, ButtonText, Container, Email, Header, LogoutButton, LogoutButtonContainer, Username } from './styles';
+import { Avatar, ButtonText, Container, Email, Header, Button, ButtonContainer, Username } from './styles';
 import RootStackParamList from '../../types/rootStackParamList';
 import { Alert } from 'react-native';
 import { useEffect, useState } from 'react';
@@ -29,7 +29,7 @@ export default function User({ navigation }: Props) {
     try {
       navigation.navigate('Login')
     } catch (error) {
-      Alert.alert('Erro', String(error).replace('Error:', ''))
+      Alert.alert('Error', String(error).replace('Error:', ''))
     }
   }
 
@@ -45,11 +45,11 @@ export default function User({ navigation }: Props) {
         <Email>{user.email}</Email>
       </Header>
 
-      <LogoutButtonContainer>
-        <LogoutButton onPress={backToLogin}>
-          <ButtonText>Sair</ButtonText>
-        </LogoutButton>
-      </LogoutButtonContainer>
+      <ButtonContainer>
+        <Button onPress={backToLogin}>
+          <ButtonText>Logout</ButtonText>
+        </Button>
+      </ButtonContainer>
     </Container>
   )
 }
