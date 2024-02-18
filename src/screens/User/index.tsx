@@ -25,7 +25,7 @@ export default function User({ navigation }: Props) {
     fetchUser();
   }, []);
 
-  async function backToLogin() {
+  async function logout() {
     try {
       navigation.navigate('Login')
     } catch (error) {
@@ -48,7 +48,7 @@ export default function User({ navigation }: Props) {
       </Header>
 
       <ButtonContainer>
-        <Button onPress={backToLogin}>
+        <Button onPress={logout}>
           <ButtonText>Logout</ButtonText>
         </Button>
       </ButtonContainer>
