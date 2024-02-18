@@ -12,6 +12,14 @@ export const Header = styled.View`
   justify-content: center;
 `;
 
+export const Content = styled.View`
+  background-color: ${props => props.theme.colors.gray[200]};
+  background-color: ${props => props.theme.colors.white};
+  align-items: center;
+  padding: ${props => props.theme.padding.md};
+  border-radius: ${props => props.theme.borderRadius};
+`;
+
 export const Avatar = styled.Image`
   width: 58px;
   height: 58px;

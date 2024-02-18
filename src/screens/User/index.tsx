@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Avatar, ButtonText, Container, Email, Header, Button, ButtonContainer, Username } from './styles';
+import { Avatar, ButtonText, Container, Email, Header, Button, ButtonContainer, Username, Content } from './styles';
 import RootStackParamList from '../../types/rootStackParamList';
 import { Alert } from 'react-native';
 import { useEffect, useState } from 'react';
@@ -36,13 +36,15 @@ export default function User({ navigation }: Props) {
   return (
     <Container>
       <Header>
-        <Avatar
-          source={{
-            uri: 'https://live.staticflickr.com/4010/4699332776_a6e60f41ae_z.jpg',
-          }}
-        />
-        <Username>{user.name}</Username>
-        <Email>{user.email}</Email>
+        <Content>
+          <Avatar
+            source={{
+              uri: 'https://live.staticflickr.com/4010/4699332776_a6e60f41ae_z.jpg',
+            }}
+          />
+          <Username>{user.name}</Username>
+          <Email>{user.email}</Email>
+        </Content>
       </Header>
 
       <ButtonContainer>

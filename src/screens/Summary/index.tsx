@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Title, Subtitle, Scroll } from './styles';
-import DataCard from '../../components/DataCard';
-import RootStackParamList from '../../types/rootStackParamList';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import DataCard from '../../components/DataCard';
 import { HealthData } from '../../types/healthData';
+import RootStackParamList from '../../types/rootStackParamList';
 import theme from '../../theme/theme';
+import { Container, Title, Subtitle, Scroll } from './styles';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Summary'>;
 
@@ -80,11 +81,11 @@ export default function Summmary({ navigation }: Props) {
   useEffect(() => {
     parseData()
   }, [])
-  console.log(healthData)
+
   return (
     <Container>
       <Title>Summary</Title>
-      <Subtitle>Check your most recent data or update them by pressing the cards</Subtitle>
+      <Subtitle>Check your most recent data or update them by pressing the cards below</Subtitle>
 
       <Scroll>
         {healthData.map(item => (
@@ -99,24 +100,6 @@ export default function Summmary({ navigation }: Props) {
           />
         ))}
       </Scroll>
-      {/* <FlatList
-        data={healthData}
-        renderItem={({ item }) =>
-          <>
-            <DataCard
-              key={item.id}
-              id={item.id}
-              params={getHealthDataParams(item.id)!}
-              data={item.data}
-              note={item.note}
-              lastUpdate={item.lastUpdate}
-              setHealthData={setHealthData}
-            />
-          </>
-        }
-        style={{ paddingHorizontal: 16 }}
-      >
-      </FlatList> */}
     </Container>
   );
 }
