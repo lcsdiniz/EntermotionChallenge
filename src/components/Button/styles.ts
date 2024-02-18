@@ -4,7 +4,7 @@ export const ButtonContainer = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   margin-top: ${props => props.theme.margin.xl};
-  padding: 0 ${props => props.theme.padding.md};
+  padding: ${props => props.theme.padding.md} 0;
   border-radius: ${props => props.theme.borderRadius};
   background-color: ${props => props.theme.colors.primary};
 `;
