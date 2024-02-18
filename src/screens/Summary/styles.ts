@@ -20,8 +20,3 @@ export const Subtitle = styled.Text`
   font-weight: 500;
   color: ${props => props.theme.colors.gray[500]};
 `;
-
-export const CardList = styled.View`
-  flex: 1;
-  background-color: ${props => props.theme.colors.white};
-`;

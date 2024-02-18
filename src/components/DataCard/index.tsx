@@ -5,13 +5,10 @@ import { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import currentFormattedDate from '../../utils/currentFormattedDate';
 import { HealthData } from '../../types/healthData';
+import { HealthDataParams } from '../../screens/Summary';
 
 interface DataCardProps {
-  params: {
-    title: string
-    icon: any
-    measureUnit: string
-  }
+  params: HealthDataParams
   id: string
   data: string
   lastUpdate: string
@@ -56,19 +53,6 @@ export default function DataCard({ params, id, data, lastUpdate, setHealthData }
     setVisible(false);
   };
 
-  // function formatData(data: DataT): string {
-  //   if (typeof data === 'number') {
-  //     return data.toString();
-  //   } else if (typeof data === 'object') {
-  //     if ('systolic' in data && 'diastolic' in data) {
-  //       return `${data.systolic}/${data.diastolic}`;
-  //     } else if ('hours' in data && 'minutes' in data) {
-  //       return `${data.hours}:${data.minutes}`;
-  //     }
-  //   }
-  //   return data;
-  // }
-
   return (
     <Container onPress={showDialog}>
       <View style={{
@@ -89,7 +73,7 @@ export default function DataCard({ params, id, data, lastUpdate, setHealthData }
       <Header>
         <Row>
           {params.icon}
-          <Title>{params.title}</Title>
+          <Title style={{ color: params.color }}>{params.title}</Title>
         </Row>
 
         <View>

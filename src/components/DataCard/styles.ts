@@ -4,7 +4,7 @@ export const Container = styled.TouchableOpacity`
   border-radius: ${props => props.theme.borderRadius};
   background-color: ${props => props.theme.colors.white};
   padding: ${props => props.theme.padding.sm} ${props => props.theme.padding.md};
-  margin-top: ${props => props.theme.margin.md};
+  margin-bottom: ${props => props.theme.margin.md};
   box-shadow: 0px 1px 2.22px rgba(0, 0, 0, 0.22);
 `;
 

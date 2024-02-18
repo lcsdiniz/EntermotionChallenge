@@ -2,9 +2,13 @@ import { Theme } from '@emotion/react';
 
 const theme: Theme = {
   colors: {
-    primary: '#3cb4e7',
+    primary: '#e57a3c',
     white: '#FFF',
     black: '#020202',
+    pink: '#fe2d55',
+    red: '#e21419',
+    orange: '#ff4900',
+    blue: '#3fc4e3',
     gray: {
       100: '#f3f4f6',
       200: '#e5e7eb',
@@ -45,6 +49,7 @@ const theme: Theme = {
     xl: '32px',
   },
   borderRadius: '8px',
+  iconSize: 30
 };
 
 export default theme;

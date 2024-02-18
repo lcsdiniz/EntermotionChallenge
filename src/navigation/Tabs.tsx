@@ -4,6 +4,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import Summary from '../screens/Summary';
 import User from '../screens/User';
+import theme from '../theme/theme';
 
 const Tabs = () => {
   const Tab = createBottomTabNavigator();
@@ -22,8 +23,9 @@ const Tabs = () => {
 
           return <FontAwesome name={iconName!} size={size} color={color} />;
         },
-        tabBarActiveTintColor: 'tomato',
+        tabBarActiveTintColor: theme.colors.primary,
         tabBarInactiveTintColor: 'gray',
+        tabBarLabelStyle: { fontSize: 12 }
       })}
     >
       <Tab.Screen

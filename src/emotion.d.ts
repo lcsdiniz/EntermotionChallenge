@@ -6,6 +6,10 @@ declare module '@emotion/react' {
             primary: string;
             white: string;
             black: string;
+            pink: string;
+            red: string;
+            orange: string;
+            blue: string;
             gray: {
                 100: string;
                 200: string;
@@ -51,5 +55,6 @@ declare module '@emotion/react' {
             medium: string;
             large: string;
         };
+        iconSize: number;
     }
 }
