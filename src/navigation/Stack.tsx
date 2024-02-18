@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator();
 const MainStack = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false, gestureEnabled: false }}>
+      <Stack.Navigator screenOptions={{ headerShown: false }} >
         <Stack.Screen
           name="Login"
           component={Login}
@@ -20,7 +20,7 @@ const MainStack = () => {
           component={Tabs}
         />
       </Stack.Navigator>
-    </NavigationContainer>
+    </NavigationContainer >
   );
 };
 

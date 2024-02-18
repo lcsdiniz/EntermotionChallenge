@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Title, Subtitle } from './styles';
+import { Container, Title, Subtitle, Scroll } from './styles';
 import DataCard from '../../components/DataCard';
 import RootStackParamList from '../../types/rootStackParamList';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { View, TouchableOpacity, Text, FlatList } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
 import { HealthData } from '../../types/healthData';
 import theme from '../../theme/theme';
 
@@ -31,10 +29,10 @@ export default function Summmary({ navigation }: Props) {
     const caloriesBurned = await AsyncStorage.getItem('caloriesBurned');
     const sleep = await AsyncStorage.getItem('sleep');
 
-    const parsedHeartRate = heartRate ? JSON.parse(heartRate) : { id: 'heartRate', data: 'N/A', lastUpdate: 'N/A' };
-    const parsedBloodPressure = bloodPressure ? JSON.parse(bloodPressure) : { id: 'bloodPressure', data: 'N/A', lastUpdate: 'N/A' };
-    const parsedCaloriesBurned = caloriesBurned ? JSON.parse(caloriesBurned) : { id: 'caloriesBurned', data: 'N/A', lastUpdate: 'N/A' };
-    const parsedSleep = sleep ? JSON.parse(sleep) : { id: 'sleep', data: 'N/A', lastUpdate: 'N/A' };
+    const parsedHeartRate = heartRate ? JSON.parse(heartRate) : { id: 'heartRate', data: 'N/A', lastUpdate: 'N/A', note: 'N/A' };
+    const parsedBloodPressure = bloodPressure ? JSON.parse(bloodPressure) : { id: 'bloodPressure', data: 'N/A', lastUpdate: 'N/A', note: 'N/A' };
+    const parsedCaloriesBurned = caloriesBurned ? JSON.parse(caloriesBurned) : { id: 'caloriesBurned', data: 'N/A', lastUpdate: 'N/A', note: 'N/A' };
+    const parsedSleep = sleep ? JSON.parse(sleep) : { id: 'sleep', data: 'N/A', lastUpdate: 'N/A', note: 'N/A' };
 
     setHealthData([
       parsedHeartRate,
@@ -79,51 +77,38 @@ export default function Summmary({ navigation }: Props) {
     return healthDataParams.find((type) => type.id === id);
   }
 
-  async function handleGenerate() {
-    const token = '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';
-
-    const prompt = 'You are a assistant specialized in health. As you check, in you have to look for anomalies in the data and informed an tell what is possibly wrong or which value should be expected, 10 words max. The output must start with "Anomaly detected:"';
-
-    const response = await axios.post('https://api.openai.com/v1/chat/completions', {
-      model: 'gpt-3.5-turbo',
-      messages: [
-        {
-          role: 'user',
-          content: prompt,
-        },
-      ],
-      temperature: 0.20,
-      max_tokens: 500,
-      top_p: 1,
-    }, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-      },
-    });
-
-    console.log(response.data.choices[0].message.content);
-  }
-
   useEffect(() => {
     parseData()
   }, [])
-
+  console.log(healthData)
   return (
     <Container>
       <Title>Summary</Title>
       <Subtitle>Check your most recent data or update them by pressing the cards</Subtitle>
 
-      {/* <TouchableOpacity onPress={() => handleGenerate()}><Text>GPT!!!</Text></TouchableOpacity> */}
-
-      <FlatList
+      <Scroll>
+        {healthData.map(item => (
+          <DataCard
+            key={item.id}
+            id={item.id}
+            params={getHealthDataParams(item.id)!}
+            data={item.data}
+            note={item.note}
+            lastUpdate={item.lastUpdate}
+            setHealthData={setHealthData}
+          />
+        ))}
+      </Scroll>
+      {/* <FlatList
         data={healthData}
-        renderItem={({ item, index }) =>
+        renderItem={({ item }) =>
           <>
             <DataCard
               key={item.id}
               id={item.id}
-              params={getHealthDataParams(item.id)}
+              params={getHealthDataParams(item.id)!}
               data={item.data}
+              note={item.note}
               lastUpdate={item.lastUpdate}
               setHealthData={setHealthData}
             />
@@ -131,7 +116,7 @@ export default function Summmary({ navigation }: Props) {
         }
         style={{ paddingHorizontal: 16 }}
       >
-      </FlatList>
+      </FlatList> */}
     </Container>
   );
 }

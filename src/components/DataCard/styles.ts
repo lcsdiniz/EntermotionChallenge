@@ -1,4 +1,9 @@
 import styled from '@emotion/native';
+import { Theme } from '@emotion/react';
+
+interface BadgeProps {
+  color: string;
+}
 
 export const Container = styled.TouchableOpacity`
   border-radius: ${props => props.theme.borderRadius};
@@ -38,3 +43,24 @@ export const MeasureUnit = styled.Text`
   color: ${props => props.theme.colors.gray[400]};
 `;
 
+export const Note = styled.Text`
+  font-size: ${props => props.theme.fontSizes.medium};
+  font-weight: 500;
+  color: ${props => props.theme.colors.gray[700]};
+`
+
+export const BadgeContainer = styled.View`
+  flex-direction: row;
+  margin-top: ${props => props.theme.margin.sm};
+`
+
+export const Badge = styled.View<BadgeProps>`
+  background-color: ${({ color }) => color};
+  border-radius: ${props => props.theme.borderRadius};
+  padding: 0 ${props => props.theme.padding.sm};
+`
+
+export const BadgeText = styled.Text`
+  font-weight: 500;
+  color: ${props => props.theme.colors.white};
+`

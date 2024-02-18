@@ -20,3 +20,8 @@ export const Subtitle = styled.Text`
   font-weight: 500;
   color: ${props => props.theme.colors.gray[500]};
 `;
+
+export const Scroll = styled.ScrollView`
+  flex: 1;
+  padding: 0 ${props => props.theme.padding.md};
+`;

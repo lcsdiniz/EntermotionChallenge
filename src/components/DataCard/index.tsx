@@ -1,21 +1,24 @@
 import { Text, View } from 'react-native';
 import Dialog from "react-native-dialog";
-import { Container, Data, Header, MeasureUnit, Row, Title } from './styles';
+import { Badge, BadgeContainer, BadgeText, Container, Data, Header, MeasureUnit, Note, Row, Title } from './styles';
 import { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import currentFormattedDate from '../../utils/currentFormattedDate';
 import { HealthData } from '../../types/healthData';
 import { HealthDataParams } from '../../screens/Summary';
+import { assistantHelp } from '../../services/assistant';
+import theme from '../../theme/theme';
 
 interface DataCardProps {
   params: HealthDataParams
   id: string
   data: string
+  note: string
   lastUpdate: string
   setHealthData: React.Dispatch<React.SetStateAction<HealthData[]>>
 }
 
-export default function DataCard({ params, id, data, lastUpdate, setHealthData }: DataCardProps) {
+export default function DataCard({ params, id, data, note, lastUpdate, setHealthData }: DataCardProps) {
   const [visible, setVisible] = useState(false);
   const [value, setValue] = useState('')
 
@@ -28,6 +31,16 @@ export default function DataCard({ params, id, data, lastUpdate, setHealthData }
     return null
   };
 
+  const noteColor = (noteValue: string) => {
+    if (noteValue === 'Anomaly detected') {
+      return theme.colors.red;
+    } else if (noteValue === 'Alert') {
+      return theme.colors.orange;
+    } else {
+      return theme.colors.green;
+    }
+  };
+
   const showDialog = () => {
     setVisible(true);
   };
@@ -38,11 +51,13 @@ export default function DataCard({ params, id, data, lastUpdate, setHealthData }
 
   const handleUpdate = async () => {
     try {
-      await AsyncStorage.setItem(id, JSON.stringify({ id, data: value, lastUpdate: currentFormattedDate() }))
+      const assistantNote = await assistantHelp(value, params.measureUnit)
+
+      await AsyncStorage.setItem(id, JSON.stringify({ id, data: value, lastUpdate: currentFormattedDate(), note: assistantNote }))
       setHealthData(prevHealthData => {
         return prevHealthData.map(item => {
           if (item.id === id) {
-            return { ...item, data: value, lastUpdate: currentFormattedDate() };
+            return { ...item, data: value, lastUpdate: currentFormattedDate(), note: assistantNote };
           }
           return item;
         });
@@ -85,6 +100,16 @@ export default function DataCard({ params, id, data, lastUpdate, setHealthData }
         {data}
         <MeasureUnit>{params.measureUnit}</MeasureUnit>
       </Data>
+
+      <BadgeContainer>
+        <Badge color={noteColor(note.split(":")[0])}>
+          <BadgeText>{note.split(":")[0]}</BadgeText>
+        </Badge>
+      </BadgeContainer>
+
+      <Note>
+        {note.split(": ")[1]}
+      </Note>
     </Container>
   );
 }

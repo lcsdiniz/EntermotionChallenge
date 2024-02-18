@@ -9,6 +9,7 @@ const theme: Theme = {
     red: '#e21419',
     orange: '#ff4900',
     blue: '#3fc4e3',
+    green: '#098902',
     gray: {
       100: '#f3f4f6',
       200: '#e5e7eb',
