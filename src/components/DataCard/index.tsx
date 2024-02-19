@@ -55,7 +55,6 @@ export default function DataCard({ params, id, data, note, lastUpdate, setHealth
   const handleUpdate = async () => {
     try {
       const assistantNote = await assistantHelp(value, params.measureUnit)
-      console.log("assistantNote", assistantNote)
       await AsyncStorage.setItem(id, JSON.stringify({ id, data: value, lastUpdate: currentFormattedDate(), note: assistantNote }))
       setHealthData(prevHealthData => {
         return prevHealthData.map(item => {
