@@ -104,15 +104,20 @@ export default function DataCard({ params, id, data, note, lastUpdate, setHealth
         <MeasureUnit>{params.measureUnit}</MeasureUnit>
       </Data>
 
-      <BadgeContainer>
-        <Badge color={noteColor(note.split("->")[0])}>
-          <BadgeText>{note.split("->")[0]}</BadgeText>
-        </Badge>
-      </BadgeContainer>
+      {note === 'N/A' ? (
+        null
+      ) : <>
+        <BadgeContainer>
+          <Badge color={noteColor(note.split("->")[0])}>
+            <BadgeText>{note.split("->")[0]}</BadgeText>
+          </Badge>
+        </BadgeContainer>
 
-      <Note>
-        {note.split("-> ")[1]}
-      </Note>
+        <Note>
+          {note.split("-> ")[1]}
+        </Note>
+      </>
+      }
     </Container>
   );
 }

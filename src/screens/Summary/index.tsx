@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import Fontisto from 'react-native-vector-icons/Fontisto';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import DataCard from '../../components/DataCard';
 import { HealthData } from '../../types/healthData';
@@ -46,10 +45,10 @@ export default function Summmary({ navigation }: Props) {
       color: theme.colors.red,
     },
     {
-      id: "caloriesBurned",
-      icon: <FontAwesome5 name="fire" size={theme.iconSize} color={theme.colors.orange} />,
-      title: "Calories Burned",
-      measureUnit: "Cal",
+      id: "temperature",
+      icon: <FontAwesome6 name="temperature-half" size={theme.iconSize} color={theme.colors.orange} />,
+      title: "Temperature",
+      measureUnit: "°F",
       color: theme.colors.orange,
     },
     {
